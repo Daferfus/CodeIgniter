@@ -7,9 +7,17 @@
  * Time: 15:55
  */
 class Eventos extends CI_Controller{
-    public function index(){
+    public function index($offset = 0){
+
+        $config['base_url'] = base_url() . "eventos/index";
+        $config['total_rows'] = $this->db->count_all('eventos');
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 3;
+
+        $this->pagination->initialize($config);
+
         $data['titulo'] = 'Próximos Eventos';
-        $data['eventos'] = $this->Eventos_model->get_eventos();
+        $data['eventos'] = $this->Eventos_model->get_eventos(FALSE, $config['per_page'], $offset);
         $this->load->view('templates/header');
         $this->load->view('eventos/index', $data);
         $this->load->view('templates/footer');

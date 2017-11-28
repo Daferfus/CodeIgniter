@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
+$route['eventos/index'] = 'eventos/index';
 $route['eventos/create'] = 'eventos/create';
 $route['eventos/update'] = 'eventos/update';
 $route['eventos/(:any)'] = 'eventos/view/$1';

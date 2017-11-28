@@ -10,7 +10,12 @@ class Eventos_model extends CI_Model{
     public function __construct(){
         $this->load->database();
     }
-    public function get_eventos($evento_id = FALSE){
+    public function get_eventos($evento_id = FALSE, $limit = FALSE, $offset = FALSE){
+
+        if($limit){
+            $this->db->limit($limit, $offset);
+        }
+
         if($evento_id === FALSE){
             $this->db->order_by('evento_id', 'DESC');
             $query = $this->db->get('eventos');
