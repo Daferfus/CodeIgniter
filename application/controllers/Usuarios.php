@@ -46,13 +46,17 @@ class Usuarios extends CI_Controller{
 
                 $contraseña = md5($this->input->post('contraseña'));
 
+
+                $rol_usuario = $this->Usuarios_model->rol($nombreusuario);
+
                 $usuario_id = $this->Usuarios_model->login($nombreusuario, $contraseña);
 
                 if($usuario_id){
 
                     $usuario_data = array(
-                        'usuario_id' => usuario_id,
+                        'usuario_id' => $usuario_id,
                         'usuario_nombre' => $nombreusuario,
+                        'usuario_rol_id' => $rol_usuario,
                         'logueado' => true
                     );
 
@@ -69,7 +73,7 @@ class Usuarios extends CI_Controller{
         }
 
         public function logout(){
-            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('logueado');
             $this->session->unset_userdata('usuario_nombre');
             $this->session->unset_userdata('usuario_id');
 

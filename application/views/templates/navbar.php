@@ -7,8 +7,8 @@
         list-style-type: none;
     }
 
-    form#nav {
-        float: right;
+    ul#cambiante a{
+        color: green;
     }
 
 </style>
@@ -24,26 +24,28 @@
                 <a class="nav-link" href="<?= base_url() ?>about">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>eventos">Eventos</a>
+                <a class="nav-link" href="<?= base_url() ?>eventos">Próximos Eventos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>eventos/resultados">Resultados</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="<?= base_url() ?>tipos">Tipos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>news">Noticias</a>
+                <a class="nav-link" href="<?= base_url() ?>noticias">Noticias</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>login">Dashboard</a>
-            </li>
-            <?php if(!$this->session->userdata('logged_in')) : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>usuarios/registro">Registrarse</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>usuarios/login">Loguearse</a>
-            </li>
+        </ul>
+        <ul id="cambiante" class="nav navbar-nav navbar-right">
+            <?php if(!$this->session->userdata('logueado')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url() ?>usuarios/registro">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url() ?>usuarios/login">Loguearse</a>
+                </li>
             <?php endif; ?>
-            <?php if($this->session->userdata('logged_in')) : ?>
+            <?php if($this->session->userdata('usuario_rol_id') === 1) : ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>eventos/create">Insertar Eventos</a>
             </li>
@@ -55,10 +57,6 @@
             </li>
             <?php endif; ?>
         </ul>
-        <form id="nav" class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
 </nav>
 <div class="container">

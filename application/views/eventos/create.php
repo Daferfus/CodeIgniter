@@ -22,9 +22,8 @@
         <input type="file" class="form-control" name="userfile">
     </div>
     <div class="form-group">
-        <label for="reglamento">Reglamento</label>
-        <textarea id="editor1" class="form-control" name="reglamento" placeholder="Reglamento del Evento"></textarea>
-        <small id="ayudaReglamento">Máximo de 1000 carácteres.</small>
+     <label for="userfile">Reglamento</label>
+     <input type="file" class="form-control" name="userfile">
     </div>
     <div class="form-group">
         <label for="fecha">Fecha</label>
@@ -60,6 +59,11 @@
         <label for="meta">Meta</label>
         <input type="text" class="form-control" name="meta" placeholder="Carretera Donde se Encuentra la Meta del Evento">
         <small id="ayudaMeta">Máximo de 20 carácteres.</small>
+    </div>
+    <div class="form-group">
+        <label for="activa">¿Activo?</label><br>
+        <input type="radio" name="activa" value="y" checked>Activo<br>
+        <input type="radio" name="activa" value="n">No Activo<br>
     </div>
     <div class="form-group">
         <label for="tipo">Tipo</label>

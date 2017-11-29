@@ -26,11 +26,10 @@
     }
 </style>
 <h1><?= $titulo ?></h1>
-<?php foreach($noticias as $noticia) : ?>
-    <h2><?php echo $noticia['noticia_titulo'];?></h2>
-    <img src="<?php echo base_url(); ?>assets/imagenes/noticias/<?php echo $noticia['noticia_imagen'];?>"/>
-    <p><small><a class="btn btn-default" href="<?php echo base_url('/noticias/'.$noticia['noticia_id']);?>">Ver más..</a></small></p>
+<?php foreach($eventos as $evento) : ?>
+<img src="<?php echo base_url(); ?>assets/imagenes/eventos/<?php echo $evento['evento_cartel'];?>"/>
+<h2><?php echo $evento['evento_descripcion'];?></h2>
 <?php endforeach; ?>
 <div class="pagination-links">
-    <?php echo $this->pagination->create_links(); ?>
+<?php echo $this->pagination->create_links(); ?>
 </div>

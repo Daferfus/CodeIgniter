@@ -1,34 +1,59 @@
 <?php
 
-class News_model extends CI_Model {
+class News_model extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->load->database();
     }
 
-    public function get_news($slug = FALSE) {
-        if ($slug === FALSE) {
-            $query = $this->db->get('news');
+    public function get_news($noticia_id = FALSE, $limit = FALSE, $offset = FALSE)
+    {
+
+        if ($limit) {
+            $this->db->limit($limit, $offset);
+        }
+
+        if ($noticia_id === FALSE) {
+            $this->db->order_by("str_to_date(noticia_fecha, '%Y-%c-%d')");
+            $query = $this->db->get_where('noticias');
             return $query->result_array();
         }
-        $query = $this->db->get_where('news', array('slug' => $slug));
+
+        $query = $this->db->get_where('noticias', array('noticia_id' => $noticia_id));
         return $query->row_array();
     }
 
-    public function set_news() {
-        $this->load->helper('text');//Para emplear el convert_accented_characters (quitar acentos al slug)
-        $this->load->helper('url');//Para generar el slug a partir del titulo
-        //$this->input->post es como $_POST pero mas seguro para evitar inyeccion sql
-        $titulo = $this->input->post('title');
-        //El slug lo generaremos mediante un helper a partir del titulo
-        $slug = convert_accented_characters(url_title($titulo, 'dash', true));
-        $text = $this->input->post('text');
+    public function set_news($noticia_imagen)
+    {
+
         $data = array(
-            'title' => $titulo,
-            'slug' => $slug,
-            'text' => $text
+            'noticia_titulo' => $this->input->post('titulo'),
+            'noticia_imagen' => $noticia_imagen,
+            'noticia_fecha' => $this->input->post('fecha'),
+            'noticia_texto' => $this->input->post('texto'),
         );
-        $this->db->insert('news', $data);
+
+        return $this->db->insert('noticias', $data);
     }
 
+    public function delete_news($noticia_id)
+    {
+        $this->db->where('noticia_id', $noticia_id);
+        $this->db->delete('noticias');
+        return true;
+    }
+
+    public function update_news($noticia_imagen)
+    {
+        $data = array(
+            'noticia_titulo' => $this->input->post('titulo'),
+            'noticia_imagen' => $noticia_imagen,
+            'noticia_fecha' => $this->input->post('fecha'),
+            'noticia_texto' => $this->input->post('texto'),
+        );
+        $this->db->where('noticia_id', $this->input->post('id'));
+        return $this->db->update('noticias', $data);
+    }
 }

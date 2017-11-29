@@ -2,12 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['eventos/index'] = 'eventos/index';
+$route['eventos/resultados'] = 'eventos/resultados';
 $route['eventos/create'] = 'eventos/create';
 $route['eventos/update'] = 'eventos/update';
 $route['eventos/(:any)'] = 'eventos/view/$1';
 $route['eventos'] = 'eventos/index';
 
-$route['noticias'] = 'noticias/index';
+$route['noticias/index'] = 'news/index';
+$route['noticias/create'] = 'news/create';
+$route['noticias/update'] = 'news/update';
+$route['noticias/(:any)'] = 'news/view/$1';
+$route['noticias'] = 'news/index';
 
 $route['default_controller'] = 'pages/view';
 

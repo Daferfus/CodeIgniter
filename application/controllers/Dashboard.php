@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller {
     public function validate_usser() {
         $user = $this->input->post('username');
         $passwd = $this->input->post('password');
-        $sql = "SELECT * FROM users WHERE user_login = ? ";
+        $sql = "SELECT * FROM users WHERE usuario_login = ? ";
         $query = $this->db->query($sql, array($user));
         $row = $query->row();
 
