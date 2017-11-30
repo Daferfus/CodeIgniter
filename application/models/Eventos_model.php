@@ -44,7 +44,7 @@ class Eventos_model extends CI_Model{
         return $query->row_array();
     }
 
-    public function create_evento($evento_cartel){
+    public function create_evento($evento_cartel, $evento_reglamento){
 
         $data = array(
             'evento_tipo' => $this->input->post('tipo'),
@@ -55,7 +55,7 @@ class Eventos_model extends CI_Model{
             'evento_poblacion' => $this->input->post('poblacion'),
             'evento_provincia' => $this->input->post('provincia'),
             'evento_organizador' => $this->input->post('organizador'),
-            'evento_reglamento' => $this->input->post('reglamento'),
+            'evento_reglamento' => $evento_reglamento,
             'evento_distancia' => $this->input->post('distancia'),
             'evento_salida' => $this->input->post('salida'),
             'evento_meta' => $this->input->post('meta'),
@@ -71,22 +71,23 @@ class Eventos_model extends CI_Model{
         return true;
     }
 
-    public function update_evento(){
+    public function update_evento($evento_cartel, $evento_reglamento){
         $data = array(
             'evento_tipo' => $this->input->post('tipo'),
-            'evento_cartel' => $this->input->post('cartel'),
+            'evento_cartel' => $evento_cartel,
             'evento_fecha' => $this->input->post('fecha'),
             'evento_hora' => $this->input->post('hora'),
             'evento_descripcion' => $this->input->post('titulo'),
             'evento_poblacion' => $this->input->post('poblacion'),
             'evento_provincia' => $this->input->post('provincia'),
             'evento_organizador' => $this->input->post('organizador'),
-            'evento_reglamento' => $this->input->post('reglamento'),
+            'evento_reglamento' => $evento_reglamento,
             'evento_distancia' => $this->input->post('distancia'),
             'evento_salida' => $this->input->post('salida'),
             'evento_meta' => $this->input->post('meta'),
             'evento_activa' => $this->input->post('activa'),
         );
+        print_r($data);
         $this->db->where('evento_id', $this->input->post('id'));
         return $this->db->update('eventos',$data);
     }

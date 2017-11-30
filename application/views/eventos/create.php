@@ -22,8 +22,8 @@
         <input type="file" class="form-control" name="userfile">
     </div>
     <div class="form-group">
-     <label for="userfile">Reglamento</label>
-     <input type="file" class="form-control" name="userfile">
+     <label for="userfile2">Reglamento</label>
+     <input type="file" class="form-control" name="userfile2">
     </div>
     <div class="form-group">
         <label for="fecha">Fecha</label>

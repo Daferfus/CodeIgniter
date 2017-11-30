@@ -18,7 +18,8 @@ $route['default_controller'] = 'pages/view';
 
 $route['tipos'] = 'tipos/index';
 $route['tipos/create'] = 'tipos/create';
-$route['tipos/eventos/(:any)'] = 'tipos/eventos/$1';
+//$route['tipos/eventos/(:any)'] = 'tipos/eventos/$1';
+$route['tipos/eventos/(:any)/(:any)'] = 'tipos/eventos/$1/$2';
 $route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

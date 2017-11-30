@@ -55,7 +55,7 @@ class Eventos extends CI_Controller{
         }else{
             //Configuración de la imágen subida.
             $config['upload_path'] = './assets/imagenes/eventos';
-            $config['allowed_types'] = 'jpg|png';
+            $config['allowed_types'] = 'jpg|png|pdf';
             $config['max_size'] = '2048';
             $config['max_width'] = '2000';
             $config['max_height'] = '2000';
@@ -65,11 +65,13 @@ class Eventos extends CI_Controller{
             if(!$this->upload->do_upload()){
                 $errors = array('error' => $this->upload->display_errors());
                 $evento_cartel = 'donde-esta-la-imagen.jpg';
+                $evento_reglamento = 'NULL';
             }else{
                 $data = array('upload_data' => $this->upload->data());
                 $evento_cartel = $_FILES['userfile']['name'];
+                $evento_reglamento = $_FILES['userfile2']['name'];
             }
-            $this->Eventos_model->create_evento($evento_cartel);
+            $this->Eventos_model->create_evento($evento_cartel, $evento_reglamento);
 
             $this->session->set_flashdata('evento_creado', 'El evento ha sido creado');
 
@@ -115,7 +117,25 @@ class Eventos extends CI_Controller{
             redirect('usuarios/login');
         }
 
-        $this->Eventos_model->update_evento();
+        $config['upload_path'] = './assets/imagenes/eventos';
+        $config['allowed_types'] = 'jpg|png|pdf';
+        $config['max_size'] = '2048';
+        $config['max_width'] = '2000';
+        $config['max_height'] = '2000';
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload()){
+            $errors = array('error' => $this->upload->display_errors());
+            $evento_cartel = 'donde-esta-la-imagen.jpg';
+            $evento_reglamento = 'NULL';
+        }else{
+            $data = array('upload_data' => $this->upload->data());
+            $evento_cartel = $_FILES['userfile']['name'];
+            $evento_reglamento = $_FILES['userfile2']['name'];
+        }
+
+        $this->Eventos_model->update_evento($evento_cartel, $evento_reglamento);
 
         $this->session->set_flashdata('evento_actualizado', 'El evento ha sido actualizado');
 
