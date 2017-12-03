@@ -10,5 +10,5 @@
     <label for="contraseña">Contraseña</label>
     <input type="password" class="form-control" name="contraseña" placeholder="Introduce Contraseña">
 </div>
-<button type="submit" class="btn btn-primary">Crear Usuario</button>
+<button type="submit" class="btn btn-primary">Logueate</button>
 <?php echo form_close(); ?>

@@ -19,9 +19,15 @@ class Tipos_model extends CI_Model{
 
     public function create_tipo(){
         $data = array(
-            'name' => $this->input->evento('evento_descripcion')
+            'tipo_descripcion' => $this->input->post('nombre')
         );
         return $this->db->insert('tipos', $data);
+    }
+
+    public function delete_tipo($tipo_id){
+        $this->db->where('tipo_id', $tipo_id);
+        $this->db->delete('tipos');
+        return true;
     }
 
     public function get_tipo($evento_tipo){

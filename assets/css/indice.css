@@ -1,0 +1,25 @@
+h1 {
+    color: red;
+}
+h2 {
+    color: deepskyblue;
+}
+
+.pagination-links{
+    margin: 30px 0;
+}
+
+.pagination-links strong{
+    padding: 8px 13px;
+    margin: 5px;
+    background: black;
+    border: 1px blue solid;
+    color: green;
+}
+
+a.pagination-links {
+    padding: 8px 13px;
+    margin: 5px;
+    background: white;
+    border: 1px black solid;
+}

@@ -26,10 +26,12 @@
     }
 </style>
 <h1><?= $titulo ?></h1>
+<hr>
 <?php foreach($noticias as $noticia) : ?>
     <h2><?php echo $noticia['noticia_titulo'];?></h2>
     <img src="<?php echo base_url(); ?>assets/imagenes/noticias/<?php echo $noticia['noticia_imagen'];?>"/>
     <p><small><a class="btn btn-default" href="<?php echo base_url('/noticias/'.$noticia['noticia_id']);?>">Ver más..</a></small></p>
+    <hr>
 <?php endforeach; ?>
 <div class="pagination-links">
     <?php echo $this->pagination->create_links(); ?>

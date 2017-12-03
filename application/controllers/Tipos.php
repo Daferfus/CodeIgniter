@@ -20,23 +20,38 @@ class Tipos extends CI_Controller
     }
     public function create(){
 
-        if(!$this->session->userdata('logueado')){
+        if($this->session->userdata('logueado') && $this->session->userdata('usuario_rol_id') == 1 || $this->session->userdata('usuario_rol_id') == 3) {
+
+            $data['titulo'] = "Crear Tipo";
+            $this->form_validation->set_rules('nombre', 'nombre', 'required');
+
+            if ($this->form_validation->run() === FALSE) {
+                $this->load->view('templates/header');
+                $this->load->view('tipos/create', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $this->Tipos_model->create_tipo();
+
+                $this->session->set_flashdata('tipo_creado', 'El tipo de evento ha sido creado con éxito');
+
+                redirect('tipos');
+            }
+        }else{
             redirect('usuarios/login');
         }
+    }
 
-        $data['titulo'] = "Crear Tipo";
-        $this->form_validation->set_rules('nombre', 'nombre', 'required');
+    public function delete($tipo_id){
 
-        if($this->form_validation->run() === FALSE){
-            $this->load->view('templates/header');
-            $this->load->view('tipos/create', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $this->Tipos_model->create_tipo();
+        if($this->session->userdata('logueado') && $this->session->userdata('usuario_rol_id') == 1 || $this->session->userdata('usuario_rol_id') == 3) {
 
-            $this->session->set_flashdata('tipo_creado', 'El tipo de evento ha sido creado con éxito');
 
+            $this->Tipos_model->delete_tipo($tipo_id);
+
+            $this->session->set_flashdata('tipo_borrado', 'Tu tipo ha sido borrado');
             redirect('tipos');
+        }else{
+            redirect('usuarios/login');
         }
     }
 
